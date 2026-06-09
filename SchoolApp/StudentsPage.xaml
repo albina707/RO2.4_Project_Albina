@@ -5,19 +5,35 @@
              Title="Students">
 
     <VerticalStackLayout Padding="20" Spacing="10">
+
         <Label Text="Students" FontSize="24" />
 
+        <!-- form: type a name, tap Add -->
+        <HorizontalStackLayout Spacing="10">
+            <Entry x:Name="NewNameEntry"
+                    Text="{Binding NewName}"
+                    Placeholder="New student name"
+                    WidthRequest="220" />
+            <Button Text="Add"
+                    Clicked="OnAddClicked" />
+        </HorizontalStackLayout>
+
+        <!-- the list -->
         <CollectionView x:Name="StudentsList"
+                        ItemsSource="{Binding Students}"
                         SelectionMode="Single"
                         SelectionChanged="OnStudentSelected">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="{Binding .}"
-                           FontSize="18"
-                           Padding="12,8" />
+                    <Grid Padding="10" ColumnDefinitions="*,Auto">
+                        <Label Text="{Binding Name}"
+                               Grid.Column="0" FontSize="18" />
+                        <Label Text="{Binding Gpa, StringFormat='GPA: {0:F2}'}"
+                               Grid.Column="1" FontSize="16" />
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
 
+    </VerticalStackLayout>
 </ContentPage>
