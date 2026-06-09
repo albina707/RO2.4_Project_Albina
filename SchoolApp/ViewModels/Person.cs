@@ -1,7 +1,30 @@
-﻿namespace SchoolApp.ViewModels;
+﻿using System.ComponentModel;
 
-public class Person
+namespace SchoolApp.ViewModels;
+
+public class Person : INotifyPropertyChanged
 {
-    public string Name { get; set; } = "Albina";
-    public string City { get; set; } = "Atyrau";
+    private string _name = "Albina";
+    public string Name
+    {
+        get => _name;
+        set
+        {
+            _name = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
+        }
+    }
+
+    private string _city = "Atyrau";
+    public string City
+    {
+        get => _city;
+        set
+        {
+            _city = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(City)));
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 }
